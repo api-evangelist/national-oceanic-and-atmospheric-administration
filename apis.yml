@@ -12,16 +12,16 @@ created: '2024-12-03'
 modified: '2026-03-16'
 specificationVersion: '0.19'
 tags:
-  - Federal Government
-  - Weather
-  - Oceans
   - Atmosphere
+  - Federal Government
+  - Oceans
+  - Weather
 apis:
   - aid: national-oceanic-and-atmospheric-administration:national-oceanic-and-atmospheric-administration
     name: National Oceanic and Atmospheric Administration
     tags:
-      - Weather
       - Oceans
+      - Weather
     humanURL: https://www.noaa.gov/
     properties:
       - url: https://www.noaa.gov/
