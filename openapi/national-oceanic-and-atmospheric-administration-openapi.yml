@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: NOAA CO-OPS Data API
+  description: >-
+    The NOAA Center for Operational Oceanographic Products and Services (CO-OPS)
+    Data API provides observations and predictions from CO-OPS stations
+    including water levels, tides, currents, meteorological data, and
+    derived products. Operated by the National Oceanic and Atmospheric
+    Administration (NOAA), U.S. Department of Commerce.
+  version: '1.0'
+  contact:
+    name: CO-OPS User Services
+    email: co-ops.userservices@noaa.gov
+    url: https://tidesandcurrents.noaa.gov/
+  license:
+    name: U.S. Government Work
+    url: https://www.usa.gov/government-works
+servers:
+  - url: https://api.tidesandcurrents.noaa.gov/api/prod
+    description: NOAA CO-OPS production data API
+tags:
+  - name: Observations
+    description: Retrieve observations and predictions from CO-OPS stations.
+paths:
+  /datagetter:
+    get:
+      tags:
+        - Observations
+      summary: Retrieve CO-OPS station observations and predictions
+      description: >-
+        Returns observations or predictions for a single CO-OPS station. Use
+        date or begin_date/end_date/range to control the time window, and
+        product to choose the dataset (water_level, predictions, currents,
+        air_temperature, wind, etc.).
+      operationId: getData
+      parameters:
+        - name: station
+          in: query
+          required: true
+          description: 7-character CO-OPS station ID, or currents identifier.
+          schema:
+            type: string
+        - name: product
+          in: query
+          required: true
+          description: Data product to retrieve.
+          schema:
+            type: string
+            enum:
+              - water_level
+              - hourly_height
+              - high_low
+              - daily_mean
+              - monthly_mean
+              - one_minute_water_level
+              - predictions
+              - air_gap
+              - air_temperature
+              - water_temperature
+              - wind
+              - air_pressure
+              - visibility
+              - humidity
+              - salinity
+              - conductivity
+              - currents
+              - currents_predictions
+              - currents_header
+              - ofs_water_level
+              - datums
+        - name: begin_date
+          in: query
+          description: Start of the time window (yyyyMMdd, yyyyMMdd HH:mm, MM/dd/yyyy, or MM/dd/yyyy HH:mm).
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          description: End of the time window.
+          schema:
+            type: string
+        - name: range
+          in: query
+          description: Hours of data to retrieve relative to begin_date, end_date, or now.
+          schema:
+            type: integer
+        - name: date
+          in: query
+          description: Convenience selector (today, latest, recent).
+          schema:
+            type: string
+            enum: [today, latest, recent]
+        - name: datum
+          in: query
+          description: Vertical datum reference for water level products.
+          schema:
+            type: string
+            enum: [MLLW, MHHW, MSL, MTL, NAVD, STND, CRD, IGLD, LWD]
+        - name: units
+          in: query
+          description: Unit system for returned values.
+          schema:
+            type: string
+            enum: [metric, english]
+        - name: time_zone
+          in: query
+          description: Time zone for timestamps.
+          schema:
+            type: string
+            enum: [gmt, lst, lst_ldt]
+        - name: format
+          in: query
+          description: Response format.
+          schema:
+            type: string
+            enum: [json, xml, csv]
+        - name: interval
+          in: query
+          description: Sampling interval for predictions and meteorological data.
+          schema:
+            type: string
+        - name: bin
+          in: query
+          description: Bin number for currents requests.
+          schema:
+            type: integer
+        - name: vel_type
+          in: query
+          description: Velocity reporting style for currents (speed_dir or default).
+          schema:
+            type: string
+            enum: [speed_dir, default]
+        - name: application
+          in: query
+          description: Application identifier for the requesting client (recommended).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Observations or predictions in the requested format.
+        '400':
+          description: Invalid request parameters.
