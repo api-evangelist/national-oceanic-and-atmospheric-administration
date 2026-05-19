@@ -1,24 +1,23 @@
 naftiko: 1.0.0-alpha2
 info:
-  label: NOAA CO-OPS Data API
-  description: The NOAA Center for Operational Oceanographic Products and Services (CO-OPS) Data API provides observations
-    and predictions from CO-OPS stations including water levels, tides, currents, meteorological data, and derived products.
-    Operated by the National Oceanic and Atmospheric Administration (NOAA), U.S. Department of Commerce.
+  label: NOAA CO-OPS Data API — Observations
+  description: 'NOAA CO-OPS Data API — Observations. 1 operations. Lead operation: Retrieve CO-OPS station observations and
+    predictions. Self-contained Naftiko capability covering one National Oceanic And Atmospheric Administration business surface.'
   tags:
-  - National
-  - Oceanic
-  - And
-  - Atmospheric
-  - Administration
-  - API
-  created: '2026-05-06'
-  modified: '2026-05-06'
+  - National Oceanic And Atmospheric Administration
+  - Observations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NATIONAL_OCEANIC_AND_ATMOSPHERIC_ADMINISTRATION_API_KEY: NATIONAL_OCEANIC_AND_ATMOSPHERIC_ADMINISTRATION_API_KEY
 capability:
   consumes:
   - type: http
-    namespace: national-oceanic-and-atmospheric-administration
+    namespace: national-oceanic-and-atmospheric-administration-observations
     baseUri: https://api.tidesandcurrents.noaa.gov/api/prod
-    description: NOAA CO-OPS Data API HTTP API.
+    description: NOAA CO-OPS Data API — Observations business capability. Self-contained, no shared references.
     resources:
     - name: datagetter
       path: /datagetter
@@ -26,17 +25,22 @@ capability:
       - name: getdata
         method: GET
         description: Retrieve CO-OPS station observations and predictions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
         inputParameters:
         - name: station
           in: query
           type: string
-          required: true
           description: 7-character CO-OPS station ID, or currents identifier.
+          required: true
         - name: product
           in: query
           type: string
-          required: true
           description: Data product to retrieve.
+          required: true
         - name: begin_date
           in: query
           type: string
@@ -85,40 +89,53 @@ capability:
           in: query
           type: string
           description: Application identifier for the requesting client (recommended).
-        outputRawFormat: json
-        outputParameters:
-        - name: result
-          type: object
-          value: $.
   exposes:
   - type: rest
+    namespace: national-oceanic-and-atmospheric-administration-observations-rest
     port: 8080
-    namespace: national-oceanic-and-atmospheric-administration-rest
-    description: REST adapter for NOAA CO-OPS Data API.
+    description: REST adapter for NOAA CO-OPS Data API — Observations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
     resources:
-    - path: /datagetter
-      name: getdata
+    - path: /v1/datagetter
+      name: datagetter
+      description: REST surface for datagetter.
       operations:
       - method: GET
         name: getdata
         description: Retrieve CO-OPS station observations and predictions
-        call: national-oceanic-and-atmospheric-administration.getdata
+        call: national-oceanic-and-atmospheric-administration-observations.getdata
+        with:
+          station: rest.station
+          product: rest.product
+          begin_date: rest.begin_date
+          end_date: rest.end_date
+          range: rest.range
+          date: rest.date
+          datum: rest.datum
+          units: rest.units
+          time_zone: rest.time_zone
+          format: rest.format
+          interval: rest.interval
+          bin: rest.bin
+          vel_type: rest.vel_type
+          application: rest.application
         outputParameters:
         - type: object
           mapping: $.
   - type: mcp
+    namespace: national-oceanic-and-atmospheric-administration-observations-mcp
     port: 9090
-    namespace: national-oceanic-and-atmospheric-administration-mcp
     transport: http
-    description: MCP adapter for NOAA CO-OPS Data API for AI agent use.
+    description: MCP adapter for NOAA CO-OPS Data API — Observations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
     tools:
-    - name: getdata
+    - name: retrieve-co-ops-station-observations
       description: Retrieve CO-OPS station observations and predictions
       hints:
         readOnly: true
         destructive: false
         idempotent: true
-      call: national-oceanic-and-atmospheric-administration.getdata
+      call: national-oceanic-and-atmospheric-administration-observations.getdata
       with:
         station: tools.station
         product: tools.product
@@ -134,51 +151,6 @@ capability:
         bin: tools.bin
         vel_type: tools.vel_type
         application: tools.application
-      inputParameters:
-      - name: station
-        type: string
-        description: 7-character CO-OPS station ID, or currents identifier.
-        required: true
-      - name: product
-        type: string
-        description: Data product to retrieve.
-        required: true
-      - name: begin_date
-        type: string
-        description: Start of the time window (yyyyMMdd, yyyyMMdd HH:mm, MM/dd/yyyy, or MM/dd/yyyy HH:mm).
-      - name: end_date
-        type: string
-        description: End of the time window.
-      - name: range
-        type: integer
-        description: Hours of data to retrieve relative to begin_date, end_date, or now.
-      - name: date
-        type: string
-        description: Convenience selector (today, latest, recent).
-      - name: datum
-        type: string
-        description: Vertical datum reference for water level products.
-      - name: units
-        type: string
-        description: Unit system for returned values.
-      - name: time_zone
-        type: string
-        description: Time zone for timestamps.
-      - name: format
-        type: string
-        description: Response format.
-      - name: interval
-        type: string
-        description: Sampling interval for predictions and meteorological data.
-      - name: bin
-        type: integer
-        description: Bin number for currents requests.
-      - name: vel_type
-        type: string
-        description: Velocity reporting style for currents (speed_dir or default).
-      - name: application
-        type: string
-        description: Application identifier for the requesting client (recommended).
       outputParameters:
       - type: object
         mapping: $.
