@@ -1,0 +1,318 @@
+{
+  "item": [
+    {
+      "id": "14986aa4-cc6f-4da7-8225-026106d5a34b",
+      "name": "Observations",
+      "description": {
+        "content": "Retrieve observations and predictions from CO-OPS stations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b176d7a-1796-4640-b6c9-d539c513162c",
+          "name": "Retrieve CO-OPS station observations and predictions",
+          "request": {
+            "name": "Retrieve CO-OPS station observations and predictions",
+            "description": {
+              "content": "Returns observations or predictions for a single CO-OPS station. Use date or begin_date/end_date/range to control the time window, and product to choose the dataset (water_level, predictions, currents, air_temperature, wind, etc.).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datagetter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "station",
+                  "value": "<string>",
+                  "description": "(Required) 7-character CO-OPS station ID, or currents identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "product",
+                  "value": "<string>",
+                  "description": "(Required) Data product to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "begin_date",
+                  "value": "<string>",
+                  "description": "Start of the time window (yyyyMMdd, yyyyMMdd HH:mm, MM/dd/yyyy, or MM/dd/yyyy HH:mm)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End of the time window."
+                },
+                {
+                  "disabled": false,
+                  "key": "range",
+                  "value": "<integer>",
+                  "description": "Hours of data to retrieve relative to begin_date, end_date, or now."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>",
+                  "description": "Convenience selector (today, latest, recent)."
+                },
+                {
+                  "disabled": false,
+                  "key": "datum",
+                  "value": "<string>",
+                  "description": "Vertical datum reference for water level products."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "Unit system for returned values."
+                },
+                {
+                  "disabled": false,
+                  "key": "time_zone",
+                  "value": "<string>",
+                  "description": "Time zone for timestamps."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Sampling interval for predictions and meteorological data."
+                },
+                {
+                  "disabled": false,
+                  "key": "bin",
+                  "value": "<integer>",
+                  "description": "Bin number for currents requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "vel_type",
+                  "value": "<string>",
+                  "description": "Velocity reporting style for currents (speed_dir or default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "application",
+                  "value": "<string>",
+                  "description": "Application identifier for the requesting client (recommended)."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b73d43f-da2f-4bd2-ac6b-f8187fa9562a",
+              "name": "Observations or predictions in the requested format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datagetter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "station",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "range",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "vel_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a17fbfa4-cbcb-4156-8f45-b21a81eca0ec",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datagetter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "station",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "range",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "vel_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidesandcurrents.noaa.gov/api/prod",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "049f2d07-9003-4281-b985-8320db0adfee",
+    "name": "NOAA CO-OPS Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NOAA Center for Operational Oceanographic Products and Services (CO-OPS) Data API provides observations and predictions from CO-OPS stations including water levels, tides, currents, meteorological data, and derived products. Operated by the National Oceanic and Atmospheric Administration (NOAA), U.S. Department of Commerce.\n\nContact Support:\n Name: CO-OPS User Services\n Email: co-ops.userservices@noaa.gov",
+      "type": "text/plain"
+    }
+  }
+}

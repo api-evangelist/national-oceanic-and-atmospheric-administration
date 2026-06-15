@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NOAA CO-OPS Data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Observations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve CO-OPS station observations and predictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter",
+            "params": [
+              {
+                "name": "station",
+                "value": "",
+                "type": "query",
+                "description": "7-character CO-OPS station ID, or currents identifier."
+              },
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Data product to retrieve."
+              },
+              {
+                "name": "begin_date",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time window (yyyyMMdd, yyyyMMdd HH:mm, MM/dd/yyyy, or MM/dd/yyyy HH:mm)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End of the time window."
+              },
+              {
+                "name": "range",
+                "value": "",
+                "type": "query",
+                "description": "Hours of data to retrieve relative to begin_date, end_date, or now."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Convenience selector (today, latest, recent)."
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Vertical datum reference for water level products."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Unit system for returned values."
+              },
+              {
+                "name": "time_zone",
+                "value": "",
+                "type": "query",
+                "description": "Time zone for timestamps."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Sampling interval for predictions and meteorological data."
+              },
+              {
+                "name": "bin",
+                "value": "",
+                "type": "query",
+                "description": "Bin number for currents requests."
+              },
+              {
+                "name": "vel_type",
+                "value": "",
+                "type": "query",
+                "description": "Velocity reporting style for currents (speed_dir or default)."
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier for the requesting client (recommended)."
+              }
+            ]
+          },
+          "docs": "Returns observations or predictions for a single CO-OPS station. Use date or begin_date/end_date/range to control the time window, and product to choose the dataset (water_level, predictions, currents, air_temperature, wind, etc.)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
