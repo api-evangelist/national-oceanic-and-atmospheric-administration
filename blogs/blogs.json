@@ -1,0 +1,21 @@
+{
+  "repo": "national-oceanic-and-atmospheric-administration",
+  "feeds": [
+    {
+      "source": "https://www.noaa.gov/rss.xml",
+      "feed_url": "https://www.noaa.gov/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.ncdc.noaa.gov/cdo-web/webservices/v2",
+      "feed_url": "https://www.ncdc.noaa.gov/cdo-web/webservices/v2",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 13
+}
