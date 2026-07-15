@@ -38,6 +38,8 @@ apis:
       The NOAA CO-OPS Data API provides observations and predictions from CO-OPS stations including tides, currents,
       water levels, meteorological data, and marine forecasts.
 common:
+  - type: AgenticAccess
+    url: agentic-access/national-oceanic-and-atmospheric-administration-agentic-access.yml
   - type: DomainSecurity
     url: security/national-oceanic-and-atmospheric-administration-domain-security.yml
   - type: GitHubOrganization
