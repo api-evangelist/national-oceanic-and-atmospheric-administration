@@ -1,0 +1,14 @@
+{
+  "provider": "national-oceanic-and-atmospheric-administration",
+  "sources": [
+    "national-oceanic-and-atmospheric-administration-observations-api-openapi.yml"
+  ],
+  "outputs": [
+    "national-oceanic-and-atmospheric-administration-observations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
