@@ -36,7 +36,7 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 tags:
   - Atmosphere
-  - Federal-Government
+  - Federal Government
   - Ocean
   - Weather
 tags_raw:
@@ -44,6 +44,7 @@ tags_raw:
   - Federal Government
   - Oceans
   - Weather
+  - Federal-Government
 apis:
 - aid: >-
     national-oceanic-and-atmospheric-administration:national-oceanic-and-atmospheric-administration-observations-api
